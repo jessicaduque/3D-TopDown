@@ -6,27 +6,75 @@ using UnityEngine.AI;
 public class Heroi : MonoBehaviour
 {
     private NavMeshAgent Agente;
-    public Vector3 Destino;
+    private Vector3 Destino;
+    public GameObject MeuAtaque;
+    private Animator ControlAnim;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         Destino = new Vector3(0, 0, 0);
-        Agente = GetComponent<NavMeshAgent>(); 
+        Agente = GetComponent<NavMeshAgent>();
+        ControlAnim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0)){
+        if (Input.GetMouseButtonDown(0))
+        {
             Vector3 mousepoint = Input.mousePosition;
-            Ray pontoDeSaida = Camera.main.ScreenPointToRay(mousepoint);
+            Ray pontodesaida = Camera.main.ScreenPointToRay(mousepoint);
             RaycastHit localTocou;
-            if(Physics.Raycast(pontoDeSaida, out localTocou, Mathf.Infinity)){
-                Destino = localTocou.point;
+            if (Physics.Raycast(pontodesaida, out localTocou, Mathf.Infinity))
+            {
+                if(localTocou.collider.gameObject.tag == "Inimigo")
+                {
+                    Destino = localTocou.transform.position;
+                }
+                else
+                {
+                    Destino = localTocou.point;
+                }
             }
         }
 
+       
+
         Agente.SetDestination(Destino);
+
+        ControleAtaque();
     }
+
+
+    void ControleAtaque()
+    {
+        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.X))
+        {
+            ControlAnim.SetTrigger("Ataque");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ControlAnim.SetTrigger("Ataque");
+            AtkDistancia();
+        }
+    }
+    public void AtivarAtk()
+    {
+        MeuAtaque.SetActive(true);
+    }
+
+    public void DesativarAtk()
+    {
+        MeuAtaque.SetActive(false);
+    }
+
+    void AtkDistancia()
+    {
+        RaycastHit meuAtkD;
+        if (Physics.Raycast(MeuAtaque.transform.position, transform.forward, out meuAtkD, 10f))
+        {
+            Debug.Log(meuAtkD.collider.gameObject.name);
+        }
+    }
+
 }
