@@ -10,7 +10,6 @@ public class Heroi : MonoBehaviour
     public GameObject MeuAtaque;
     private Animator ControlAnim;
 
-
     void Start()
     {
         Destino = new Vector3(0, 0, 0);
@@ -37,9 +36,6 @@ public class Heroi : MonoBehaviour
                 }
             }
         }
-
-       
-
         Agente.SetDestination(Destino);
 
         ControleAtaque();
@@ -54,8 +50,7 @@ public class Heroi : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            ControlAnim.SetTrigger("Ataque");
-            AtkDistancia();
+            ControlAnim.SetTrigger("Disparo");
         }
     }
     public void AtivarAtk()
@@ -73,7 +68,10 @@ public class Heroi : MonoBehaviour
         RaycastHit meuAtkD;
         if (Physics.Raycast(MeuAtaque.transform.position, transform.forward, out meuAtkD, 10f))
         {
-            Debug.Log(meuAtkD.collider.gameObject.name);
+            if(meuAtkD.collider.gameObject.tag == "Inimigo")
+            {
+               meuAtkD.collider.gameObject.GetComponent<Inimigo>().TomeiDano();
+            }
         }
     }
 

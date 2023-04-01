@@ -12,11 +12,16 @@ public class Inimigo : MonoBehaviour
     {
         if(colidiu.gameObject.tag == "Ataque")
         {
-            hp--;
-            if(hp <= 0)
-            {
-                Destroy(this.gameObject);
-            }
+            TomeiDano();
+        }
+    }
+
+    public void TomeiDano()
+    {
+        hp--;
+        if (hp <= 0)
+        {
+            Destroy(this.gameObject);
         }
     }
 }
