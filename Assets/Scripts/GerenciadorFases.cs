@@ -5,20 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class GerenciadorFases : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int faseAtual;
 
     public void Fase(int numeroFase)
     {
         SceneManager.LoadScene(numeroFase);
+    }
+
+    public void PassarFase()
+    {
+        int pFase = faseAtual + 1;
+        SceneManager.LoadScene(pFase);
     }
 }
