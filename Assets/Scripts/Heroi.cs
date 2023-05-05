@@ -12,8 +12,11 @@ public class Heroi : MonoBehaviour
     // Movimento
     private Rigidbody Corpo;
     // Giro
+    [SerializeField]
     float sensibilidadeGiro = 100f;
-    
+    // Pulo
+    [SerializeField]
+    float forcaPulo = 1000;
 
     // Stats
     public float hp = 50;
@@ -32,16 +35,20 @@ public class Heroi : MonoBehaviour
 
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            ControlAnim.SetTrigger("Pegar");
-        }
-
         Mover();
+        Pular();
+        Pegar();
+        ControleAtaque();
 
     }
 
+    void Pegar()
+    {
+        if(Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.Joystick1Button3))
+        {
+            ControlAnim.SetTrigger("Pegar");
+        }
+    }
 
     void Mover()
     {
@@ -49,7 +56,7 @@ public class Heroi : MonoBehaviour
         float velocidadeX = 0;
         Vector3 velocidadeCorrigida = velocidadeX * transform.right + velocidadeZ * transform.forward;
 
-        Corpo.velocity = new Vector3(velocidadeCorrigida.x, 0, velocidadeCorrigida.z);
+        Corpo.velocity = new Vector3(velocidadeCorrigida.x, Corpo.velocity.y, velocidadeCorrigida.z);
 
         if (Corpo.velocity.magnitude > 1)
         {
@@ -68,21 +75,25 @@ public class Heroi : MonoBehaviour
         transform.Rotate(Vector3.up * GiroY);
     }
 
+    void Pular()
+    {
+        if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button0))
+        {
+            Corpo.AddForce(Vector3.up * forcaPulo);
+        }
+    }
+
     void ControleAtaque()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button4) || Input.GetKeyDown(KeyCode.X))
         {
             ControlAnim.SetTrigger("Ataque");
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Joystick1Button5))
         {
             ControlAnim.SetTrigger("Disparo");
         }
-
-
-
-
 
     }
     public void AtivarAtk()
