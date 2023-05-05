@@ -97,14 +97,14 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.027586207
+      - time: 0.4124294
         functionName: AtivarPegada
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.40990567
+      - time: 0.68926555
         functionName: DesativarPegada
         data: 
         objectReferenceParameter: {instanceID: 0}

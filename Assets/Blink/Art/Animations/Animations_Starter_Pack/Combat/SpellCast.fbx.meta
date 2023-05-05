@@ -159,7 +159,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.7422681
+      - time: 0.62606233
         functionName: AtkDistancia
         data: 
         objectReferenceParameter: {instanceID: 0}
