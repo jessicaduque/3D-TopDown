@@ -17,6 +17,8 @@ public class Heroi : MonoBehaviour
     // Pulo
     [SerializeField]
     float forcaPulo = 1000;
+    public GameObject pe;
+    bool estaNoChao = true;
 
     // Stats
     public float hp = 50;
@@ -79,7 +81,11 @@ public class Heroi : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
-            Corpo.AddForce(Vector3.up * forcaPulo);
+            if (estaNoChao)
+            {
+                Corpo.AddForce(Vector3.up * forcaPulo);
+                estaNoChao = false;
+            }
         }
     }
 
@@ -155,8 +161,6 @@ public class Heroi : MonoBehaviour
             }
 
         }
-
-       
     }
 
     private void OnTriggerEnter(Collider colidiu)
@@ -166,6 +170,7 @@ public class Heroi : MonoBehaviour
             if(vivo == true)
             {
                 hp--;
+                Corpo.AddForce(Vector3.forward * -1000);
                 ControlAnim.SetTrigger("TomouDano");
                 if (hp <= 0)
                 {
@@ -173,7 +178,11 @@ public class Heroi : MonoBehaviour
                     Morrer();
                 }
             }
-            
+        }
+
+        if (colidiu.gameObject.tag == "Chao")
+        {
+            estaNoChao = true;
         }
 
     }
