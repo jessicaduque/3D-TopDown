@@ -138,7 +138,6 @@ public class Heroi : MonoBehaviour
         }
     }
 
-
     private void OnTriggerStay(Collider colidiu)
     {
         if (colidiu.gameObject.tag == "Pegavel")
@@ -186,7 +185,6 @@ public class Heroi : MonoBehaviour
         }
 
     }
-
 
     public void Morrer()
     {
