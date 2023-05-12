@@ -7,7 +7,7 @@ public class Heroi : MonoBehaviour
 {
     public GameObject MeuAtaque;
     private Animator ControlAnim;
-    private GerenciadorDeObjetos Inventario;
+    //private GerenciadorDeObjetos Inventario;
 
     // Movimento
     private Rigidbody Corpo;
@@ -28,7 +28,7 @@ public class Heroi : MonoBehaviour
 
     void Start()
     {
-        Inventario = GameObject.FindGameObjectWithTag("Inventario").GetComponent<GerenciadorDeObjetos>();
+        //Inventario = GameObject.FindGameObjectWithTag("Inventario").GetComponent<GerenciadorDeObjetos>();
         ControlAnim = GetComponent<Animator>();
 
         // Movimento
@@ -147,6 +147,7 @@ public class Heroi : MonoBehaviour
             {
                 string nomeObj = colidiu.gameObject.GetComponent<Item>().Nome;
                 Sprite imgObj = colidiu.gameObject.GetComponent<Item>().imagemObj;
+                /*
                 if (Inventario.ReceberItem(nomeObj, imgObj) == true)
                 {
                     Destroy(colidiu.gameObject);
@@ -155,6 +156,7 @@ public class Heroi : MonoBehaviour
                 {
                     //faz nada
                 }
+                */
 
 
                 podePegar = false;
